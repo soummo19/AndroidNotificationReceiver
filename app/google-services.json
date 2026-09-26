@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "614303315069",
+    "project_id": "notification-sample-aeaf5",
+    "storage_bucket": "notification-sample-aeaf5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614303315069:android:3e7f6ca2519022013bed14",
+        "android_client_info": {
+          "package_name": "com.soumyadeep.androidnotificationreceiver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnV04IFmdtN_p2qte_1gK1BgoYTaNf_NM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
