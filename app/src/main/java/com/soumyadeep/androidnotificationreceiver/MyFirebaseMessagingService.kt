@@ -6,6 +6,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    // Legacy callback — still works during the migration period
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "New FCM Registration Token: $token")
@@ -30,20 +31,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d(TAG, "Message Notification Body: $notificationBody")
         Log.d(TAG, "Message Data Payload: ${remoteMessage.data}")
 
-        // Show local notification banner
-        NotificationHelper.showNotification(
-            context = this,
-            title = notificationTitle,
-            body = notificationBody
-        )
+        // Ensure channel exists before showing
+        NotificationHelper.createNotificationChannel(this)
 
-        // Broadcast to UI
+        // Broadcast to UI first to guarantee the app registers it
         NotificationRepository.onNotificationReceived(
             ReceivedNotification(
                 title = notificationTitle,
                 body = notificationBody,
                 data = remoteMessage.data
             )
+        )
+
+        // Show local notification banner
+        NotificationHelper.showNotification(
+            context = this,
+            title = notificationTitle,
+            body = notificationBody
         )
     }
 

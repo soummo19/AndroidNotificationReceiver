@@ -1,5 +1,6 @@
 package com.soumyadeep.androidnotificationreceiver
 
+import android.util.Log
 import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,6 +31,10 @@ object NotificationRepository {
 
     fun updateToken(token: String) {
         _fcmToken.value = token
+    }
+
+    fun updateInstallationId(installationId: String) {
+        _installationId.value = installationId
     }
 
     fun onNotificationReceived(notification: ReceivedNotification) {
@@ -71,9 +76,11 @@ object NotificationRepository {
     suspend fun fetchInstallationId(): Result<String> {
         return try {
             val fid = FirebaseInstallations.getInstance().id.await()
+            Log.d("FCM_DEBUG", "Successfully fetched Firebase Installation ID (FID): $fid")
             _installationId.value = fid
             Result.success(fid)
         } catch (e: Exception) {
+            Log.e("FCM_DEBUG", "Failed to fetch Firebase Installation ID (FID)", e)
             Result.failure(e)
         }
     }

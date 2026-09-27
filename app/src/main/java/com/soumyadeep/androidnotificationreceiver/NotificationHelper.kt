@@ -26,11 +26,12 @@ object NotificationHelper {
         }
     }
 
+    @android.annotation.SuppressLint("MissingPermission")
     fun showNotification(context: Context, title: String?, body: String?) {
         val notificationId = System.currentTimeMillis().toInt()
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(title ?: "New Notification")
             .setContentText(body ?: "You have a new message")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -39,8 +40,8 @@ object NotificationHelper {
         try {
             val notificationManager = NotificationManagerCompat.from(context)
             notificationManager.notify(notificationId, builder.build())
-        } catch (e: SecurityException) {
-            // Permission POST_NOTIFICATIONS might not be granted
+        } catch (e: Exception) {
+            // Permission POST_NOTIFICATIONS might not be granted or Icon might be invalid
             e.printStackTrace()
         }
     }
