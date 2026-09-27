@@ -15,9 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidNotificationReceiver">
 
+        <!--add below for old fcm token -->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_channel_id"-->
+<!--            android:value="fcm_default_channel" />-->
+
+        <!--add below for installation id -->
         <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="fcm_default_channel" />
+            android:name="firebase_messaging_installation_id_enabled"
+            android:value="true" />
 
         <activity
             android:name=".MainActivity"

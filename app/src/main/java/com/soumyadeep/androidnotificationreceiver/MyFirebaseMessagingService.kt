@@ -13,6 +13,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         NotificationRepository.updateToken(token)
     }
 
+    override fun onRegistered(installationId: String) {
+        super.onRegistered(installationId)
+        Log.d(TAG, "New FCM Installation ID: $installationId")
+        NotificationRepository.updateInstallationId(installationId)
+    }
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
